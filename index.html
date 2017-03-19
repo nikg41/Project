@@ -1,0 +1,57 @@
+<!Doctype >
+<html>
+<head>
+  <title>Delhi Tourism</title>
+  <script src="java\jquery.min.js"></script>
+  <script src="java\knockout.js"></script>
+  <script src="bootstrap/js/bootstrap.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row" style="padding:10px">
+      <div class="col-md-12 header">
+        <h1>DELHI : INDIA'S CAPITAL</h1>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" >
+        <form class="navbar-form navbar-center" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+      <ul data-bind="foreach:markers" class="nav navbar-nav">
+          <li class="list" data-bind="click: $parent.Bounce,text:title"></li>
+        </ul>
+
+      </div>
+      <div class="col-md-10" id="map"></div>
+    </div>
+  </div>
+  <script>
+  var map;
+  function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+              center: {  lat: 28.7041,lng: 77.2588},
+              zoom:10
+          });
+          ko.applyBindings(new viewModel());
+  }
+  //to display an error when map is not loaded
+  function map(){
+    document.getElementById('map').innerHTML="Map Not Found";
+  }
+  </script>
+  <script src="java\app.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyCXTj8PlzMBdR6f1OoMLRoYe-kTfN5diZc&v=3&callback=initMap" onerror="map()">
+  </script>
+</body>
+</html>
